@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Akademija Ling International — Learn German</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --black:   #141312;
+  --white:   #FAFAF8;
+  --red:     #C8102E;
+  --red-dim: rgba(200,16,46,0.08);
+  --grey:    #6E6A65;
+  --border:  #E4E0DA;
+  --bg-alt:  #F3F0EC;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--white);
+  color: var(--black);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── UTILS ── */
+.serif { font-family: 'Cormorant Garamond', serif; }
+a { text-decoration: none; color: inherit; }
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5vw;
+  background: rgba(250,250,248,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow 0.3s;
+}
+nav.scrolled { box-shadow: 0 4px 32px rgba(0,0,0,0.06); }
+
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+.logo-dot {
+  width: 7px; height: 7px;
+  background: var(--red);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+  align-items: center;
+}
+.nav-links a {
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--grey);
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--black); }
+
+.nav-cta {
+  background: var(--red) !important;
+  color: #fff !important;
+  padding: 0.5rem 1.3rem;
+  border-radius: 3px;
+  font-weight: 500 !important;
+  transition: opacity 0.2s !important;
+}
+.nav-cta:hover { opacity: 0.85; }
+
+/* ── HERO ── */
+.hero {
+  padding-top: 68px;
+  min-height: 82vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  gap: 1.5rem;
+}
+
+.hero-eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  font-weight: 500;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.2rem, 7vw, 6.5rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+  max-width: 800px;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--red);
+}
+
+.hero-sub {
+  font-size: 1rem;
+  color: var(--grey);
+  line-height: 1.7;
+  max-width: 420px;
+  font-weight: 300;
+}
+
+.hero-btn {
+  display: inline-block;
+  margin-top: 0.5rem;
+  background: var(--black);
+  color: var(--white);
+  padding: 0.85rem 2.2rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 3px;
+  transition: background 0.22s, transform 0.2s;
+}
+.hero-btn:hover { background: var(--red); transform: translateY(-2px); }
+
+.hero-divider {
+  width: 1px;
+  height: 60px;
+  background: var(--border);
+  margin: 0 auto;
+}
+
+/* ── SECTION SHARED ── */
+.section {
+  padding: 7rem 5vw;
+}
+.section-sm {
+  padding: 5rem 5vw;
+}
+.section-center {
+  text-align: center;
+}
+.section-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  font-weight: 500;
+  margin-bottom: 0.9rem;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.section-sub {
+  font-size: 0.92rem;
+  color: var(--grey);
+  line-height: 1.72;
+  max-width: 480px;
+  font-weight: 300;
+  margin: 0 auto;
+}
+
+/* ── SERVICES ROW ── */
+.services-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 3.5rem;
+}
+
+.service-item {
+  padding: 2.2rem 2rem;
+  border-right: 1px solid var(--border);
+}
+.service-item:last-child { border-right: none; }
+
+.service-num {
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--grey);
+  margin-bottom: 1.5rem;
+}
+.service-bar {
+  width: 28px; height: 2px;
+  background: var(--red);
+  margin-bottom: 1.2rem;
+}
+.service-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--black);
+  margin-bottom: 0.7rem;
+  line-height: 1.25;
+}
+.service-desc {
+  font-size: 0.8rem;
+  color: var(--grey);
+  line-height: 1.65;
+  font-weight: 300;
+}
+
+/* ── COURSES GRID ── */
+.courses-section {
+  background: var(--bg-alt);
+}
+
+.courses-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+}
+
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* ── COURSE CARD (expandable) ── */
+.course-card {
+  background: var(--white);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.25s;
+}
+.course-card:hover { background: #FDFCF9; }
+.course-card.open { background: var(--white); }
+
+.card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 2rem 2rem 1.5rem;
+  gap: 1rem;
+}
+
+.card-left { flex: 1; }
+
+.card-badge {
+  display: inline-block;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red);
+  background: var(--red-dim);
+  padding: 0.22rem 0.7rem;
+  border-radius: 20px;
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+}
+
+.card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--black);
+  line-height: 1.2;
+}
+
+.card-toggle {
+  width: 30px; height: 30px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: border-color 0.25s, background 0.25s, transform 0.4s;
+  margin-top: 4px;
+}
+.course-card.open .card-toggle {
+  background: var(--black);
+  border-color: var(--black);
+  transform: rotate(45deg);
+}
+.card-toggle svg { width: 12px; height: 12px; }
+.card-toggle path {
+  stroke: var(--grey);
+  transition: stroke 0.25s;
+}
+.course-card.open .card-toggle path { stroke: #fff; }
+
+/* Expandable body */
+.card-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1);
+}
+.course-card.open .card-body { max-height: 300px; }
+
+.card-body-inner {
+  padding: 0 2rem 2rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.card-desc {
+  font-size: 0.83rem;
+  color: var(--grey);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+.card-details {
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.card-detail {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  color: var(--grey);
+  letter-spacing: 0.04em;
+}
+.card-detail-icon { font-size: 0.85rem; }
+
+.card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--red);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.65rem 1.4rem;
+  border-radius: 3px;
+  align-self: flex-start;
+  transition: background 0.2s, gap 0.2s;
+}
+.card-cta:hover { background: #9B0B22; gap: 0.8rem; }
+.card-cta::after { content: '→'; }
+
+/* ── PRICING ── */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.price-card {
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 2.2rem 2rem;
+  position: relative;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+.price-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.07); transform: translateY(-4px); }
+.price-card.featured {
+  background: var(--black);
+  border-color: var(--black);
+}
+
+.price-tag {
+  position: absolute;
+  top: -11px; left: 50%;
+  transform: translateX(-50%);
+  background: var(--red);
+  color: #fff;
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.9rem;
+  border-radius: 20px;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.price-plan {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--grey);
+  margin-bottom: 1.2rem;
+}
+.price-card.featured .price-plan { color: rgba(255,255,255,0.35); }
+
+.price-amount-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.2rem;
+  margin-bottom: 0.3rem;
+}
+.price-euro {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--red);
+  line-height: 1;
+}
+.price-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--black);
+  letter-spacing: -0.03em;
+}
+.price-card.featured .price-num { color: var(--white); }
+
+.price-period {
+  font-size: 0.73rem;
+  color: var(--grey);
+  font-weight: 300;
+  margin-bottom: 1.2rem;
+}
+.price-card.featured .price-period { color: rgba(255,255,255,0.35); }
+
+.price-divider {
+  height: 1px;
+  background: var(--border);
+  margin-bottom: 1.2rem;
+}
+.price-card.featured .price-divider { background: rgba(255,255,255,0.08); }
+
+.price-desc {
+  font-size: 0.8rem;
+  color: var(--grey);
+  line-height: 1.65;
+  font-weight: 300;
+  margin-bottom: 1.8rem;
+}
+.price-card.featured .price-desc { color: rgba(255,255,255,0.45); }
+
+.price-btn {
+  display: block;
+  text-align: center;
+  padding: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 3px;
+  border: 1px solid var(--black);
+  color: var(--black);
+  background: transparent;
+  transition: background 0.2s, color 0.2s;
+}
+.price-btn:hover { background: var(--black); color: #fff; }
+.price-card.featured .price-btn {
+  background: var(--red); border-color: var(--red); color: #fff;
+}
+.price-card.featured .price-btn:hover { background: #9B0B22; border-color: #9B0B22; }
+
+/* ── TESTIMONIALS ── */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.testi-card {
+  padding: 2rem;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  position: relative;
+  transition: border-color 0.25s;
+}
+.testi-card:hover { border-color: var(--red); }
+
+.testi-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 4rem;
+  line-height: 0.7;
+  color: var(--red);
+  opacity: 0.2;
+  position: absolute;
+  top: 1.4rem; right: 1.6rem;
+  user-select: none;
+}
+
+.testi-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.02rem;
+  font-style: italic;
+  line-height: 1.72;
+  color: var(--black);
+  margin-bottom: 1.8rem;
+  font-weight: 400;
+}
+
+.testi-author { display: flex; align-items: center; gap: 0.85rem; }
+.testi-avatar {
+  width: 38px; height: 38px;
+  background: var(--black);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--white);
+  flex-shrink: 0;
+}
+.testi-name { font-size: 0.85rem; font-weight: 500; }
+.testi-level {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-top: 0.15rem;
+}
+
+/* ── CONTACT ── */
+.contact-section {
+  background: var(--black);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 7rem;
+  align-items: start;
+}
+
+.contact-left .section-title { color: var(--white); margin-bottom: 1rem; }
+.contact-left .section-sub { color: rgba(255,255,255,0.35); margin: 0; }
+
+.contact-socials {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 2.5rem;
+}
+.social-btn {
+  width: 40px; height: 40px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 3px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem; font-weight: 600;
+  color: rgba(255,255,255,0.4);
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.social-btn:hover { border-color: var(--red); background: var(--red); color: #fff; }
+
+.contact-form { display: flex; flex-direction: column; gap: 1rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+.form-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.28);
+}
+.form-input, .form-select {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 3px;
+  padding: 0.8rem 1rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  color: var(--white);
+  outline: none;
+  transition: border-color 0.22s;
+  width: 100%;
+  appearance: none;
+}
+.form-input::placeholder { color: rgba(255,255,255,0.18); }
+.form-input:focus, .form-select:focus { border-color: var(--red); }
+.form-select option { background: #1a1a1a; }
+
+.form-submit {
+  background: var(--red);
+  color: #fff;
+  border: none;
+  padding: 0.9rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.22s, transform 0.18s;
+  margin-top: 0.3rem;
+}
+.form-submit:hover { background: #9B0B22; transform: translateY(-1px); }
+
+.form-success {
+  display: none;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.82rem;
+  color: #6ee7b7;
+  letter-spacing: 0.06em;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--black);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 2.5rem 5vw;
+}
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.5);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.footer-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+.footer-links a {
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: rgba(255,255,255,0.6); }
+.footer-copy {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.18);
+}
+
+/* ── FADE-IN ── */
+.fade {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.fade.d1 { transition-delay: 0.08s; }
+.fade.d2 { transition-delay: 0.16s; }
+.fade.d3 { transition-delay: 0.24s; }
+.fade.visible { opacity: 1; transform: none; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  nav { padding: 0 1.5rem; }
+  .nav-links { display: none; }
+  .hero-title { font-size: clamp(2.6rem, 10vw, 4rem); }
+  .section, .section-sm { padding: 5rem 1.5rem; }
+  .services-row { grid-template-columns: 1fr 1fr; }
+  .service-item { border-bottom: 1px solid var(--border); }
+  .service-item:nth-child(2n) { border-right: none; }
+  .courses-grid { grid-template-columns: 1fr 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+  .courses-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+}
+@media (max-width: 600px) {
+  .courses-grid { grid-template-columns: 1fr; }
+  .services-row { grid-template-columns: 1fr; }
+  .service-item { border-right: none; }
+}
+
+/* ── ABOUT US ── */
+.about-section { background: var(--white); }
+
+.about-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.about-text { max-width: 500px; }
+.about-text .section-title { margin-bottom: 1rem; }
+.about-desc {
+  font-size: 0.9rem;
+  color: var(--grey);
+  line-height: 1.78;
+  font-weight: 300;
+}
+
+/* ── MEET BUTTON ── */
+.meet-btn {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 60px;
+  padding: 0.9rem 1.4rem 0.9rem 0.9rem;
+  cursor: pointer;
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.2s;
+  text-align: left;
+  flex-shrink: 0;
+}
+.meet-btn:hover {
+  border-color: var(--black);
+  box-shadow: 0 6px 28px rgba(0,0,0,0.09);
+  transform: translateY(-2px);
+}
+.meet-btn.open {
+  border-color: var(--black);
+  background: var(--black);
+}
+.meet-btn.open .meet-btn-label { color: rgba(255,255,255,0.5); }
+.meet-btn.open .meet-btn-sub { color: var(--white); }
+.meet-btn.open .meet-btn-arrow { color: var(--white); transform: rotate(180deg); }
+
+.meet-btn-avatars {
+  display: flex;
+}
+.meet-btn-avatars img {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--white);
+  display: block;
+}
+.meet-btn-avatars img:last-child { margin-left: -14px; }
+
+.meet-btn-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+.meet-btn-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--grey);
+  transition: color 0.25s;
+}
+.meet-btn-sub {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--black);
+  white-space: nowrap;
+  transition: color 0.25s;
+}
+
+.meet-btn-arrow {
+  font-size: 1rem;
+  color: var(--grey);
+  margin-left: 0.3rem;
+  transition: transform 0.35s, color 0.25s;
+  display: inline-block;
+}
+
+/* ── TEACHER PANEL ── */
+.teachers-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.55s cubic-bezier(0.4,0,0.2,1), opacity 0.4s ease;
+  opacity: 0;
+}
+.teachers-panel.open {
+  max-height: 600px;
+  opacity: 1;
+}
+
+.teachers-panel-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  padding-top: 2.5rem;
+}
+
+.teacher-card-new {
+  display: flex;
+  gap: 1.8rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  padding: 2rem;
+  align-items: flex-start;
+  transition: box-shadow 0.3s;
+}
+.teacher-card-new:hover { box-shadow: 0 10px 36px rgba(0,0,0,0.07); }
+
+.teacher-photo-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+.teacher-photo {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  border: 2px solid var(--border);
+}
+.teacher-photo-tag {
+  position: absolute;
+  bottom: -4px; left: 50%;
+  transform: translateX(-50%);
+  background: var(--red);
+  color: #fff;
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.18rem 0.55rem;
+  border-radius: 20px;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.teacher-info-new { flex: 1; }
+.teacher-role-new {
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 0.3rem;
+}
+.teacher-name-new {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--black);
+  line-height: 1.1;
+  margin-bottom: 0.7rem;
+}
+.teacher-bio-new {
+  font-size: 0.78rem;
+  color: var(--grey);
+  line-height: 1.65;
+  font-weight: 300;
+  margin-bottom: 0.9rem;
+}
+.teacher-tags-new {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.1rem;
+}
+.teacher-tags-new span {
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  padding: 0.2rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  color: var(--grey);
+}
+.teacher-contact-btn {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--black);
+  border-bottom: 1px solid var(--black);
+  padding-bottom: 1px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.teacher-contact-btn:hover { color: var(--red); border-color: var(--red); }
+
+@media (max-width: 960px) {
+  .about-top { flex-direction: column; align-items: flex-start; }
+  .teachers-panel-inner { grid-template-columns: 1fr; }
+  .teachers-panel.open { max-height: 1100px; }
+  .teacher-card-new { flex-direction: row; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <span class="logo-dot"></span>
+    Akademija Ling
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#courses">Courses</a></li>
+    <li><a href="#about">About Us</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow fade">German Language Academy</p>
+  <h1 class="hero-title fade d1">Master <em>German,</em><br/>Unlock Opportunities.</h1>
+  <p class="hero-sub fade d2">Learn German effectively and confidently with expert teachers, interactive lessons, and a proven methodology.</p>
+  <a href="#courses" class="hero-btn fade d3">Explore Courses</a>
+  <div class="hero-divider"></div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="section-label fade">Our Services</div>
+  <h2 class="section-title fade d1">What We Provide</h2>
+  <div class="services-row fade d2">
+    <div class="service-item">
+      <div class="service-num">01</div>
+      <div class="service-bar"></div>
+      <div class="service-title">Professional Teachers</div>
+      <p class="service-desc">Passionate language professionals with extensive teaching experience in Germany and great digital skills.</p>
+    </div>
+    <div class="service-item">
+      <div class="service-num">02</div>
+      <div class="service-bar"></div>
+      <div class="service-title">Unique Learning Experience</div>
+      <p class="service-desc">Interactive exercises after every lesson — learn in a fun and simple way on your phone or desktop.</p>
+    </div>
+    <div class="service-item">
+      <div class="service-num">03</div>
+      <div class="service-bar"></div>
+      <div class="service-title">Online Classes</div>
+      <p class="service-desc">Live classes with professional teachers in a friendly and supportive learning atmosphere.</p>
+    </div>
+    <div class="service-item">
+      <div class="service-num">04</div>
+      <div class="service-bar"></div>
+      <div class="service-title">Exam Preparation</div>
+      <p class="service-desc">Official Goethe and telc exam preparation available as an add-on to your group course.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section class="section courses-section" id="courses">
+  <div class="courses-header fade">
+    <div>
+      <div class="section-label">Our Courses</div>
+      <h2 class="section-title">Find Your Level</h2>
+    </div>
+    <p style="font-size:0.8rem;color:var(--grey);font-weight:300;max-width:240px;line-height:1.6;">Click any course to learn more and get in touch.</p>
+  </div>
+
+  <div class="courses-grid">
+
+    <!-- A1/A2 -->
+    <div class="course-card fade" onclick="toggleCard(this)">
+      <div class="card-top">
+        <div class="card-left">
+          <span class="card-badge">Beginner</span>
+          <div class="card-title">German A1 &amp; A2</div>
+        </div>
+        <div class="card-toggle">
+          <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 1v10M1 6h10" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p class="card-desc">Master essential German skills with our comprehensive A-Level courses. Build a solid foundation in grammar, vocabulary, and everyday communication from day one.</p>
+          <div class="card-details">
+            <span class="card-detail"><span class="card-detail-icon">🕐</span> 8 × 90 min / month</span>
+            <span class="card-detail"><span class="card-detail-icon">💻</span> Online</span>
+            <span class="card-detail"><span class="card-detail-icon">👤</span> Group or Individual</span>
+          </div>
+          <a href="#contact" class="card-cta">Get in Touch</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- B1/B2 -->
+    <div class="course-card fade d1" onclick="toggleCard(this)">
+      <div class="card-top">
+        <div class="card-left">
+          <span class="card-badge">Intermediate</span>
+          <div class="card-title">German B1 &amp; B2</div>
+        </div>
+        <div class="card-toggle">
+          <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 1v10M1 6h10" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p class="card-desc">Enhance your fluency and confidence with our B-Level courses. Communicate effectively in personal and professional contexts, and prepare for real-world German interactions.</p>
+          <div class="card-details">
+            <span class="card-detail"><span class="card-detail-icon">🕐</span> 8 × 90 min / month</span>
+            <span class="card-detail"><span class="card-detail-icon">💻</span> Online</span>
+            <span class="card-detail"><span class="card-detail-icon">📋</span> Exam Prep Available</span>
+          </div>
+          <a href="#contact" class="card-cta">Get in Touch</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- C1/C2 -->
+    <div class="course-card fade d2" onclick="toggleCard(this)">
+      <div class="card-top">
+        <div class="card-left">
+          <span class="card-badge">Advanced</span>
+          <div class="card-title">German C1 &amp; C2</div>
+        </div>
+        <div class="card-toggle">
+          <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 1v10M1 6h10" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p class="card-desc">Achieve near-native proficiency with our C-Level courses. Expert-led instruction focused on nuance, complex grammar, and sophisticated language in professional environments.</p>
+          <div class="card-details">
+            <span class="card-detail"><span class="card-detail-icon">🕐</span> 8 × 90 min / month</span>
+            <span class="card-detail"><span class="card-detail-icon">💻</span> Online</span>
+            <span class="card-detail"><span class="card-detail-icon">📋</span> Exam Prep Available</span>
+          </div>
+          <a href="#contact" class="card-cta">Get in Touch</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Children -->
+    <div class="course-card fade" onclick="toggleCard(this)">
+      <div class="card-top">
+        <div class="card-left">
+          <span class="card-badge">Beginner</span>
+          <div class="card-title">Children's Courses</div>
+        </div>
+        <div class="card-toggle">
+          <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 1v10M1 6h10" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p class="card-desc">Fun, interactive German courses designed specifically for young learners. Language through play, activities, and discovery — building a lifelong love for the German language.</p>
+          <div class="card-details">
+            <span class="card-detail"><span class="card-detail-icon">🧒</span> Ages 6–14</span>
+            <span class="card-detail"><span class="card-detail-icon">💻</span> Online</span>
+            <span class="card-detail"><span class="card-detail-icon">🎮</span> Interactive</span>
+          </div>
+          <a href="#contact" class="card-cta">Get in Touch</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Language Club -->
+    <div class="course-card fade d1" onclick="toggleCard(this)">
+      <div class="card-top">
+        <div class="card-left">
+          <span class="card-badge">All Levels</span>
+          <div class="card-title">German Language Club</div>
+        </div>
+        <div class="card-toggle">
+          <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 1v10M1 6h10" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p class="card-desc">Groups of up to 6 people for a dynamic and engaging German speaking experience. Diverse perspectives, collaborative activities, and real conversation practice every session.</p>
+          <div class="card-details">
+            <span class="card-detail"><span class="card-detail-icon">🕐</span> 4 × 60 min / month</span>
+            <span class="card-detail"><span class="card-detail-icon">👥</span> Up to 6 people</span>
+            <span class="card-detail"><span class="card-detail-icon">🗣️</span> Conversation focus</span>
+          </div>
+          <a href="#contact" class="card-cta">Get in Touch</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Medical -->
+    <div class="course-card fade d2" onclick="toggleCard(this)">
+      <div class="card-top">
+        <div class="card-left">
+          <span class="card-badge">All Levels</span>
+          <div class="card-title">Medical German &amp; FSP</div>
+        </div>
+        <div class="card-toggle">
+          <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 1v10M1 6h10" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p class="card-desc">Specialized language courses for foreign doctors. Targeted medical terminology, patient communication, and focused FSP (Fachsprachprüfung) exam preparation for working in Germany.</p>
+          <div class="card-details">
+            <span class="card-detail"><span class="card-detail-icon">🏥</span> For doctors</span>
+            <span class="card-detail"><span class="card-detail-icon">💻</span> Online</span>
+            <span class="card-detail"><span class="card-detail-icon">📋</span> FSP focused</span>
+          </div>
+          <a href="#contact" class="card-cta">Get in Touch</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT US -->
+<section class="section about-section" id="about">
+
+  <div class="about-top fade">
+    <div class="about-text">
+      <div class="section-label">About Us</div>
+      <h2 class="section-title">Passionate About<br/>Teaching German</h2>
+      <p class="about-desc">At Akademija Ling International, we believe language learning should be an enjoyable journey. Our teachers are native or near-native German speakers with real experience teaching in Germany — dedicated to helping you reach your goals, whether that's an exam, a new job, or a new life abroad.</p>
+    </div>
+
+    <button class="meet-btn" id="meetBtn" onclick="toggleTeachers()">
+      <span class="meet-btn-avatars">
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt=""/>
+        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt=""/>
+      </span>
+      <span class="meet-btn-text">
+        <span class="meet-btn-label">Who will teach you?</span>
+        <span class="meet-btn-sub">Meet your teachers →</span>
+      </span>
+      <span class="meet-btn-arrow" id="meetArrow">↓</span>
+    </button>
+  </div>
+
+  <!-- Teacher reveal panel -->
+  <div class="teachers-panel" id="teachersPanel">
+    <div class="teachers-panel-inner">
+
+      <div class="teacher-card-new">
+        <div class="teacher-photo-wrap">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Markus Hoffmann" class="teacher-photo"/>
+          <div class="teacher-photo-tag">B1 – C2</div>
+        </div>
+        <div class="teacher-info-new">
+          <div class="teacher-role-new">German Language Teacher</div>
+          <div class="teacher-name-new">Markus Hoffmann</div>
+          <p class="teacher-bio-new">Born in Munich, Markus has 8+ years of experience teaching German online and in Germany. He specialises in upper-level courses and Goethe / telc exam preparation. His calm, structured style makes complex grammar feel natural.</p>
+          <div class="teacher-tags-new">
+            <span>B1–C2</span>
+            <span>Goethe Prep</span>
+            <span>telc</span>
+            <span>Grammar</span>
+          </div>
+          <a href="#contact" class="teacher-contact-btn">Book a Lesson with Markus</a>
+        </div>
+      </div>
+
+      <div class="teacher-card-new">
+        <div class="teacher-photo-wrap">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Lena Bauer" class="teacher-photo"/>
+          <div class="teacher-photo-tag">A1 – B2</div>
+        </div>
+        <div class="teacher-info-new">
+          <div class="teacher-role-new">German Language Teacher</div>
+          <div class="teacher-name-new">Lena Bauer</div>
+          <p class="teacher-bio-new">Originally from Hamburg, Lena brings warmth and creativity to every class. With 6 years of experience across beginner and intermediate levels, she has a special gift for working with new learners and young students.</p>
+          <div class="teacher-tags-new">
+            <span>A1–B2</span>
+            <span>Beginners</span>
+            <span>Children</span>
+            <span>Conversation</span>
+          </div>
+          <a href="#contact" class="teacher-contact-btn">Book a Lesson with Lena</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="section-center">
+    <div class="section-label fade">Pricing</div>
+    <h2 class="section-title fade d1">Choose Your Format</h2>
+  </div>
+  <div class="pricing-grid">
+    <div class="price-card fade">
+      <div class="price-plan">Sprachclub</div>
+      <div class="price-amount-row">
+        <span class="price-euro">€</span>
+        <span class="price-num">50</span>
+      </div>
+      <div class="price-period">per person / per month · 4 × 60 min</div>
+      <div class="price-divider"></div>
+      <p class="price-desc">Join a group of up to 6 for a dynamic German learning experience. Collaborative activities and balanced language acquisition in a relaxed setting.</p>
+      <a href="#contact" class="price-btn">Get Started</a>
+    </div>
+    <div class="price-card featured fade d1">
+      <div class="price-tag">Most Popular</div>
+      <div class="price-plan">Group Course</div>
+      <div class="price-amount-row">
+        <span class="price-euro">€</span>
+        <span class="price-num">70</span>
+      </div>
+      <div class="price-period">per person / per month · 8 × 90 min</div>
+      <div class="price-divider"></div>
+      <p class="price-desc">Small interactive group with focused attention and the energy of collaborative learning. A supportive environment where everyone progresses together.</p>
+      <a href="#contact" class="price-btn">Get Started</a>
+    </div>
+    <div class="price-card fade d2">
+      <div class="price-plan">Individual</div>
+      <div class="price-amount-row">
+        <span class="price-euro">€</span>
+        <span class="price-num">160</span>
+      </div>
+      <div class="price-period">starting from · per month · 8 × 60 min</div>
+      <div class="price-divider"></div>
+      <p class="price-desc">One-on-one lessons tailored to your exact pace, goals, and learning style. Dedicated expert attention for the fastest possible progress.</p>
+      <a href="#contact" class="price-btn">Get Started</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section section-sm" style="background:var(--bg-alt);" id="testimonials">
+  <div class="section-label fade">Testimonials</div>
+  <h2 class="section-title fade d1">What Our Students Say</h2>
+  <div class="testimonials-grid">
+    <div class="testi-card fade">
+      <span class="testi-quote">"</span>
+      <p class="testi-text">After 6 months of regularly attending the A2, now B1 course, I am personally very satisfied — especially with the positiveness and persistence of our teacher. Always smiling and positive. Keep it up!</p>
+      <div class="testi-author">
+        <div class="testi-avatar">M</div>
+        <div>
+          <div class="testi-name">Milosh</div>
+          <div class="testi-level">German C1</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card fade d1">
+      <span class="testi-quote">"</span>
+      <p class="testi-text">The online German course was well-structured, practical, and easy to follow. The teacher was professional and motivating. I saw real progress in a short time and highly recommend it!</p>
+      <div class="testi-author">
+        <div class="testi-avatar">V</div>
+        <div>
+          <div class="testi-name">Vasil</div>
+          <div class="testi-level">German A2–B1</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card fade d2">
+      <span class="testi-quote">"</span>
+      <p class="testi-text">I took online German classes for the FSP — well-organized, practical, and focused on medical terms. With great support from our teacher, I passed the exam. Highly recommended!</p>
+      <div class="testi-author">
+        <div class="testi-avatar">T</div>
+        <div>
+          <div class="testi-name">Teodora</div>
+          <div class="testi-level">German A1 / FSP</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact-section" id="contact">
+  <div class="contact-grid">
+    <div class="fade">
+      <div class="section-label" style="color:rgba(200,16,46,0.75)">Contact Us</div>
+      <h2 class="section-title">Let's Get<br/>You Started</h2>
+      <p class="section-sub">Tell us which level you're interested in and we'll find the perfect course for your goals.</p>
+      <div class="contact-socials">
+        <a href="https://www.facebook.com/share/1FN4RphDSz/" target="_blank" class="social-btn">Fb</a>
+        <a href="https://www.instagram.com/academylinginternational" target="_blank" class="social-btn">In</a>
+      </div>
+    </div>
+    <div class="fade d1">
+      <form class="contact-form" onsubmit="submitForm(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Name</label>
+            <input type="text" class="form-input" placeholder="Your name" required/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-input" placeholder="your@email.com" required/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Course Level</label>
+          <select class="form-select" required>
+            <option value="" disabled selected>Select a course</option>
+            <option>German A1</option>
+            <option>German A2</option>
+            <option>German B1</option>
+            <option>German B2</option>
+            <option>German C1</option>
+            <option>German C2</option>
+            <option>Children's Course</option>
+            <option>German Language Club</option>
+            <option>Medical German &amp; FSP</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message (optional)</label>
+          <input type="text" class="form-input" placeholder="Tell us about your goals…"/>
+        </div>
+        <button type="submit" class="form-submit">Send Message →</button>
+        <div class="form-success" id="success-msg">✓ Message sent! We'll be in touch soon.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <span class="footer-logo">
+      <span style="width:6px;height:6px;background:var(--red);border-radius:50%;display:inline-block;"></span>
+      Akademija Ling International
+    </span>
+    <ul class="footer-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#courses">Courses</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <span class="footer-copy">© 2025 Akademija Ling International. All rights reserved.</span>
+  </div>
+</footer>
+
+<script>
+  // Scroll fade-in
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+
+  // Nav shadow on scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10);
+  });
+
+  // Teachers reveal
+  function toggleTeachers() {
+    const panel = document.getElementById('teachersPanel');
+    const btn   = document.getElementById('meetBtn');
+    const open  = panel.classList.toggle('open');
+    btn.classList.toggle('open', open);
+    if (open) setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+  }
+
+  // Course card expand/collapse
+  function toggleCard(card) {
+    const isOpen = card.classList.contains('open');
+    // close all
+    document.querySelectorAll('.course-card.open').forEach(c => c.classList.remove('open'));
+    // open this one if it wasn't already open
+    if (!isOpen) card.classList.add('open');
+  }
+
+  // Contact form
+  function submitForm(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.form-submit');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.style.display = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+    }, 800);
+  }
+</script>
+</body>
+</html>
